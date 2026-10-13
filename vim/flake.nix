@@ -18,28 +18,58 @@
       mkVim =
         system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          # pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs {
+            inherit system;
+
+            config.allowUnfreePredicate =
+              pkg:
+              builtins.elem (nixpkgs.lib.getName pkg) [
+                "vim-yaml"
+              ];
+          };
         in
         pkgs.vim-full.customize {
           name = "vim";
+          vimrcConfig.customRC = builtins.readFile ./vimrc;
 
-          vimrcConfig.customRC = ''
-            set number
-            set relativenumber
-            set syntax=on
-            set tabstop=4
-            set shiftwidth=4
-            set expandtab
-
-            echo "Vim configuré par Nix activé !"
-          '';
-
-          vimrcConfig.packages.monPack = with pkgs.vimPlugins; {
+          vimrcConfig.packages.myPlugins = with pkgs.vimPlugins; {
             start = [
-              vim-airline
-              ale
+              # Theme
+              onedark-vim
+
+              # Navigation / UI
+              nerdtree
+              nerdtree-git-plugin
+              vim-devicons
+              vim-nerdtree-syntax-highlight
+              goyo-vim
+
+              # Editing
+              nerdcommenter
+
+              # Git
+              vim-gitgutter
+
+              # Languages / formats
+              vim-markdown
+              nginx-vim
+              vim-terraform
+              vim-toml
+              vim-vagrant
+              vim-yaml
+
+              # Encryption
+              vim-gnupg
             ];
           };
+
+          # vimrcConfig.packages.monPack = with pkgs.vimPlugins; {
+          #   start = [
+          #     vim-airline
+          #     # ale
+          #   ];
+          # };
         };
     in
     {
