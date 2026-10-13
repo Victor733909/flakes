@@ -3,7 +3,8 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
       supportedSystems = [
         "x86_64-linux"
@@ -14,7 +15,8 @@
 
       forEachSystem = nixpkgs.lib.genAttrs supportedSystems;
 
-      mkVim = system:
+      mkVim =
+        system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
         in
@@ -54,8 +56,6 @@
         };
       });
 
-      formatter = forEachSystem (
-        system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style
-      );
+      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
     };
 }
