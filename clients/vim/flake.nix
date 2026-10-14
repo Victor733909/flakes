@@ -33,16 +33,29 @@
             custom-vim = vim-config.packages.${system}.vim;
           }
         );
+        # or 
+        #forEachSystem = nixpkgs.lib.genAttrs supportedSystems;
     in
     {
       packages = forEachSystem (
-        { pkgs, custom-vim }:
+        { custom-vim, ... }:
         {
           default = custom-vim;
         }
       );
 
-      formatter = forEachSystem ({ pkgs, custom-vim }: pkgs.nixfmt);
+      # ou
+      #packages = forEachSystem (system:
+      #  let
+      #    pkgs = nixpkgs.legacyPackages.${system};
+      #    custom-vim = vim-config.packages.${system}.vim;
+      #  in
+      #  {
+      #    default = custom-vim;
+      #  }
+      #);
+
+      formatter = forEachSystem ({ pkgs, ... }: pkgs.nixfmt);
 
     };
 }
