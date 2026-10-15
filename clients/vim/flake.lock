@@ -1,41 +1,45 @@
 {
   "nodes": {
-    "nixpkgs": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1791883866,
-        "narHash": "sha256-yvkDdToRZ4IgPc9tSBzzCYJvTLf8n5eE3rgUkpCuD5A=",
-        "owner": "NixOs",
-        "repo": "nixpkgs",
-        "rev": "a033e66ab94a6bedf2c3d58d93a36319d3cbbbaf",
+        "lastModified": 1792085665,
+        "narHash": "sha256-X9iN67cdW9KqLuvbyyr9rdF4Zssk1uFHh1UC/GZH08s=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "54ad640b81c5e9a32db1a29e7561fda628601117",
         "type": "github"
       },
       "original": {
-        "owner": "NixOs",
-        "repo": "nixpkgs",
-        "rev": "a033e66ab94a6bedf2c3d58d93a36319d3cbbbaf",
+        "owner": "nix-community",
+        "repo": "home-manager",
         "type": "github"
       }
     },
-    "nixpkgs-terraform-source": {
+    "nixpkgs": {
       "locked": {
-        "lastModified": 1778228547,
-        "narHash": "sha256-8XLHaXtaAMhlRx3TPyacytfhWWnYkSr0M822sE4Vdvo=",
-        "owner": "NixOS",
+        "lastModified": 1791956154,
+        "narHash": "sha256-jBYGPi4udQ9uo4KQp9m2J0546nJVQitG15gvZSaVVAs=",
+        "owner": "NixOs",
         "repo": "nixpkgs",
-        "rev": "f32fd3c0cf6f34c74814b8d2a996ee56a8508798",
+        "rev": "55bfb4d7437bd4e09ab7cba58a43bd68eb310044",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "NixOs",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
-        "rev": "f32fd3c0cf6f34c74814b8d2a996ee56a8508798",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
+        "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-terraform-source": "nixpkgs-terraform-source",
         "vim-config": "vim-config"
       }
     },
