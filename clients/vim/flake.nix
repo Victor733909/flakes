@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #inputs.flake-utils.url = "github:numtide/flake-utils";
+
+    shell-config = {
+  url = "github:Victor733909/flakes?dir=shell";
+  inputs.nixpkgs.follows = "nixpkgs";
+};
   };
 
   outputs =

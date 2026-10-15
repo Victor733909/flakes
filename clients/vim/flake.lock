@@ -1,0 +1,67 @@
+{
+  "nodes": {
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1791883866,
+        "narHash": "sha256-yvkDdToRZ4IgPc9tSBzzCYJvTLf8n5eE3rgUkpCuD5A=",
+        "owner": "NixOs",
+        "repo": "nixpkgs",
+        "rev": "a033e66ab94a6bedf2c3d58d93a36319d3cbbbaf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOs",
+        "repo": "nixpkgs",
+        "rev": "a033e66ab94a6bedf2c3d58d93a36319d3cbbbaf",
+        "type": "github"
+      }
+    },
+    "nixpkgs-terraform-source": {
+      "locked": {
+        "lastModified": 1778228547,
+        "narHash": "sha256-8XLHaXtaAMhlRx3TPyacytfhWWnYkSr0M822sE4Vdvo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f32fd3c0cf6f34c74814b8d2a996ee56a8508798",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f32fd3c0cf6f34c74814b8d2a996ee56a8508798",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-terraform-source": "nixpkgs-terraform-source",
+        "vim-config": "vim-config"
+      }
+    },
+    "vim-config": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "vim",
+        "lastModified": 1792056619,
+        "narHash": "sha256-N5U47lrF7aveOJT861HF01bpYgL+XivebC07/cCy0/A=",
+        "owner": "Victor733909",
+        "repo": "flakes",
+        "rev": "bc35c3d2d0e2707aa3e95ca28615aafdc2dc1635",
+        "type": "github"
+      },
+      "original": {
+        "dir": "vim",
+        "owner": "Victor733909",
+        "repo": "flakes",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

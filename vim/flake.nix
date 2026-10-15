@@ -63,13 +63,6 @@
               vim-gnupg
             ];
           };
-
-          # vimrcConfig.packages.monPack = with pkgs.vimPlugins; {
-          #   start = [
-          #     vim-airline
-          #     # ale
-          #   ];
-          # };
         };
     in
     {
