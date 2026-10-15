@@ -21,6 +21,7 @@
       self,
       nixpkgs,
       vim-config,
+      shell-config,
       nixpkgs-terraform-source,
       ...
     }:
