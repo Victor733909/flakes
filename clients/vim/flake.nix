@@ -3,6 +3,7 @@
   inputs = {
     #nixpkgs.url = "github:NixOs/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:NixOs/nixpkgs/a033e66ab94a6bedf2c3d58d93a36319d3cbbbaf";
+    nixpkgs-terraform-source.url = "github:NixOS/nixpkgs/f32fd3c0cf6f34c74814b8d2a996ee56a8508798";
     vim-config = {
       url = "github:Victor733909/flakes?dir=vim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +16,7 @@
       self,
       nixpkgs,
       vim-config,
+      nixpkgs-terraform-source,
       ...
     }:
     let
@@ -37,6 +39,19 @@
               config.allowUnfreePredicate = pkg: nixpkgs.lib.getName pkg == "terraform";
             };
             custom-vim = vim-config.packages.${system}.vim;
+            pkgs-old = import nixpkgs-terraform-source {
+              inherit system;
+              config.allowUnfreePredicate = pkg: nixpkgs.lib.getName pkg == "terraform";
+            };
+            #custom-terraform = pkgs-old.terraform;
+            terraform-old = pkgs.symlinkJoin {
+              name = "terraform-1.5.2";
+              paths = [ pkgs-old.terraform ];
+              postBuild = ''
+                # On crée un lien symbolique nommé 'terraform15' qui pointe vers le binaire d'origine
+                ln -s $out/bin/terraform $out/bin/terraform15
+              '';
+            };
           }
         );
     in
@@ -49,7 +64,13 @@
       );
 
       devShells = forEachSystem (
-        { system, pkgs, custom-vim, ... }:
+        {
+          system,
+          pkgs,
+          custom-vim,
+          terraform-old,
+          ...
+        }:
         {
           default = pkgs.mkShell {
             packages = with pkgs; [
@@ -57,6 +78,7 @@
               zsh
               oh-my-zsh
               terraform
+              terraform-old
             ];
 
             shellHook = ''
