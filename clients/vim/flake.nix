@@ -60,7 +60,6 @@
             ];
 
             shellHook = ''
-              
                             # 1. Créer un dossier de configuration temporaire dans /tmp
                             export ZDOTDIR=$(mktemp -d)
                             
