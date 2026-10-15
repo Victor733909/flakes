@@ -1,0 +1,112 @@
+"----------Theme-----------"
+  set termguicolors
+  let g:onedark_termcolors=256
+  let g:onedark_hide_endofbuffer=1
+  let g:onedark_terminal_italics=1
+  colorscheme onedark
+
+"----------Basic configs----------"
+retab
+syntax on
+filetype on
+filetype plugin indent on
+set background=dark
+set number
+" set relativenumber
+set nobackup
+set nocompatible
+set cursorline
+set encoding=UTF-8
+set ruler
+set showmatch
+"set tabstop=4
+"set shiftwidth=4
+"set softtabstop=4
+"set expandtab
+set autowriteall
+set autoindent
+"set visualbell
+set smartindent
+set fileformat=unix
+set backspace=indent,eol,start
+set complete=.,w,b,u
+set updatetime=100
+set hlsearch
+set incsearch
+set et ai si ic nu
+set sw=2 ts=2 sts=2
+
+"----------Status Line--------------"
+set statusline=
+set statusline+=\ %Y\ %F\ %M\ %R
+set statusline+=%=
+set statusline+=\ row:\ %l\ col:\ %c\ percent:\ %p%%
+set laststatus=2
+
+"----------Plugins Configs----------"
+let g:goyo_width='100%'
+let g:goyo_height='100%'
+let g:vim_markdown_folding_disabled=1
+let g:hcl_align=1
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeDirArrows=0
+let g:NERDTreeShowHidden=0
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeRespectWildIgnore=1
+let g:NERDTreeIgnore=['\.git$','\.svn$','\.hg$','\.DS_Store$','\.devcontainer$','\.vscode$','__pycache__$','\.terraform$','\.terraform.lock.hcl$','\.terragrunt-cache$','\.pyc$']
+let g:WebDevIconsOS='Darwin'
+let g:webdevicons_enable=1
+let g:webdevicons_enable_nerdtree=1
+let g:WebDevIconsUnicodeDecorateFileNodes=1
+let g:webdevicons_conceal_nerdtree_brackets=1
+let g:WebDevIconsUnicodeDecorateFolderNodes=1
+
+"----------Shortcuts----------"
+let mapleader = ','
+
+" Toggle IDE mode in VIM
+" nmap <C-i> :GitGutterEnable<cr>:NERDTreeFind<cr>
+
+" Toggle GitGutter
+nmap <C-g> :GitGutterEnable<cr>
+
+" Toggle Fullscreen mode
+nmap <C-f> :Goyo<cr>
+
+" Toggle Terminal below current tab
+nmap <C-d> :below terminal<cr>
+
+" make NERDTree easier
+nmap <C-t> :NERDTreeToggle<cr>
+nmap <C-n> :NERDTreeFind<cr>
+
+" Turn off hlsearch 
+nnoremap <C-L> :nohls<cr><C-L>
+
+" Start NERDTree when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Automatically source the Vimrc file on save.
+augroup autosourcing
+    autocmd!
+    autocmd BufWritePost .vimrc source %
+augroup END
+
+" macros
+let @a = "ggi#! /bin/bash\n\n"
+
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:> foldmethod=indent nofoldenable
