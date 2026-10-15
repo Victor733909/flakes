@@ -49,11 +49,11 @@
       );
 
       devShells = forEachSystem (
-        { system, pkgs, ... }:
+        { system, pkgs, custom-vim, ... }:
         {
           default = pkgs.mkShell {
             packages = with pkgs; [
-              vim-config.packages.${system}.vim
+              custom-vim
               zsh
               oh-my-zsh
               terraform
