@@ -48,6 +48,8 @@
               config.allowUnfreePredicate = pkg: nixpkgs.lib.getName pkg == "terraform";
             };
             custom-vim = vim-config.packages.${system}.vim;
+
+            ## Test for another terraform version
             # pkgs-old = import nixpkgs-terraform-source {
             #   inherit system;
             #   config.allowUnfreePredicate = pkg: nixpkgs.lib.getName pkg == "terraform";
@@ -144,6 +146,7 @@
               chmod -R u+w "$ZDOTDIR"
 
               if [ -z "$ZSH_VERSION" ]; then
+                echo "Welcome to your virtual Zsh + Oh My Zsh devShell!"
                 exec zsh
               fi
             '';
