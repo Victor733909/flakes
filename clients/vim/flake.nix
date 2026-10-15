@@ -68,7 +68,7 @@
 
             terraform-bin =
               let
-                version = "1.16.6";
+                version = "1.15.9";
                 platform =
                   {
                     x86_64-linux = "linux_amd64";
