@@ -68,7 +68,7 @@
 
             terraform-bin =
               let
-                version = "1.15.9";
+                version = "1.16.6";
                 platform =
                   {
                     x86_64-linux = "linux_amd64";
@@ -83,7 +83,7 @@
                 inherit version;
                 src = pkgs.fetchurl {
                   url = "https://releases.hashicorp.com/terraform/${version}/terraform_${version}_${platform}.zip";
-                  hash = "sha256-cCshNq9nKMj/A3+EPdLbzit62IeGtzgdHXKu+iUPYBw=";
+                  hash = "sha256-OANLONAwljmaehJkoUVhqAKbK0lv0fFpRSZW5Tlo8bc=";
                 };
                 nativeBuildInputs = [ pkgs.unzip ];
                 sourceRoot = ".";
