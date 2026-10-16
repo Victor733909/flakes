@@ -11,6 +11,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixdot.url = "github:barnaby0x0/nixdot";
   };
 
   outputs =
@@ -19,6 +20,7 @@
       nixpkgs,
       vim-config,
       home-manager,
+      nixdot,
       ...
     }:
     let
@@ -69,7 +71,8 @@
               (home-manager.lib.homeManagerConfiguration {
                 inherit pkgs;
                 modules = [
-                  ./shell.nix # ou "${shell-config}/shell.nix" si le fichier vit dans ton flake shell
+                  #./shell.nix # ou "${shell-config}/shell.nix" si le fichier vit dans ton flake shell
+                  nixdot.homeModules.shell
                   {
                     home = {
                       username = "dev";
