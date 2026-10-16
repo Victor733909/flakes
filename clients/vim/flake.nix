@@ -135,7 +135,7 @@
                 chmod -R u+w "$ZDOTDIR"
               fi
               if [ -z "$ZSH_VERSION" ]; then
-                echo "Welcome to your virtual Zsh + Oh My Zsh devShell!"
+                echo "Welcome to your virtual Zsh + Oh My Zsh devShell!" | cowsay
                 exec zsh
               fi
             '';
