@@ -108,11 +108,11 @@
       },
       "locked": {
         "dir": "vim",
-        "lastModified": 1792126516,
-        "narHash": "sha256-i0SM8yjsgeyEysmsfCCuzYynBIDtwuHVGLYiYp6k9fs=",
+        "lastModified": 1792169777,
+        "narHash": "sha256-cK0Ys7awEQ8PlH6P58DsVCkMox8jvPD9Hn/PG8lv1zE=",
         "owner": "Victor733909",
         "repo": "flakes",
-        "rev": "0e62df5df9b06e985fce3e2d7d74e6d78582e6e3",
+        "rev": "1cd255d37f9a973c2e74ec17c9fff22baa926a32",
         "type": "github"
       },
       "original": {

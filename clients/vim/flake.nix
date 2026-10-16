@@ -60,7 +60,7 @@
                 inherit version;
                 src = pkgs.fetchurl {
                   url = "https://releases.hashicorp.com/terraform/${version}/terraform_${version}_${platform}.zip";
-                  hash = "sha256-p1C1oRA48WWEayZYxAyIzXBwqmemG6tDGhS6J5KOqeo=";
+                  hash = "sha256-OANLONAwljmaehJkoUVhqAKbK0lv0fFpRSZW5Tlo8bc=";
                 };
                 nativeBuildInputs = [ pkgs.unzip ];
                 sourceRoot = ".";
@@ -79,7 +79,7 @@
                       homeDirectory = "/home/dev";
                       stateVersion = "25.05";
                     };
-                    # évite que HISTFILE pointe vers /home/dev
+                    # ï¿½vite que HISTFILE pointe vers /home/dev
                     programs.zsh.history.path = "$HOME/.zsh_history";
                   }
                 ];
