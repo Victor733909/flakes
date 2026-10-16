@@ -114,13 +114,25 @@
               srm
             ];
 
+            #shellHook = ''
+            #  export ZDOTDIR=$(mktemp -d)
+            #  trap "rm -rf $ZDOTDIR" EXIT
+
+            #  cp -rL ${hm-files}/. "$ZDOTDIR"/
+            #  chmod -R u+w "$ZDOTDIR"
+
+            #  if [ -z "$ZSH_VERSION" ]; then
+            #    echo "Welcome to your virtual Zsh + Oh My Zsh devShell!"
+            #    exec zsh
+            #  fi
+            #'';
             shellHook = ''
-              export ZDOTDIR=$(mktemp -d)
-              trap "rm -rf $ZDOTDIR" EXIT
-
-              cp -rL ${hm-files}/. "$ZDOTDIR"/
-              chmod -R u+w "$ZDOTDIR"
-
+              export ZDOTDIR="/$HOME/hm-files"
+              if [ ! -f "$ZDOTDIR/.zshrc" ] || [ "${hm-files}/.zshrc" -nt "$ZDOTDIR/.zshrc" ]; then
+                echo "Syncing Home Manager configuration files..."
+                cp -rL ${hm-files}/. "$ZDOTDIR"/
+                chmod -R u+w "$ZDOTDIR"
+              fi
               if [ -z "$ZSH_VERSION" ]; then
                 echo "Welcome to your virtual Zsh + Oh My Zsh devShell!"
                 exec zsh
