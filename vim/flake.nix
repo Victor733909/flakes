@@ -58,6 +58,7 @@
               vim-toml
               vim-vagrant
               vim-yaml
+              vim-surround
 
               # Encryption
               vim-gnupg
