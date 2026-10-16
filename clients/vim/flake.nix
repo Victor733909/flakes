@@ -76,7 +76,7 @@
                       homeDirectory = "/home/dev";
                       stateVersion = "25.05";
                     };
-                    # Ã©vite que HISTFILE pointe vers /home/dev
+                    # évite que HISTFILE pointe vers /home/dev
                     programs.zsh.history.path = "$HOME/.zsh_history";
                   }
                 ];
@@ -112,6 +112,7 @@
               terraform-bin
               qrencode
               srm
+              cowsay
             ];
 
             #shellHook = ''
