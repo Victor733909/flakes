@@ -37,16 +37,13 @@
           system:
           f rec {
             inherit system;
-            pkgs = import nixpkgs {
-              inherit system;
-              config.allowUnfreePredicate = pkg: nixpkgs.lib.getName pkg == "terraform";
-            };
+            pkgs = import nixpkgs { inherit system; };
             custom-vim = vim-config.packages.${system}.vim;
 
             terraform-bin =
               let
-                version = "1.16.6";
-                platform =
+                terraformVersion = "1.16.6";
+                terraformPlatform =
                   {
                     x86_64-linux = "linux_amd64";
                     aarch64-linux = "linux_arm64";
@@ -54,32 +51,57 @@
                     aarch64-darwin = "darwin_arm64";
                   }
                   .${system};
+
+                terraformHash =
+                  {
+                    x86_64-linux = "sha256-OANLONAwljmaehJkoUVhqAKbK0lv0fFpRSZW5Tlo8bc=";
+                    aarch64-linux = "sha256-p1C1oRA48WWEayZYxAyIzXBwqmemG6tDGhS6J5KOqeo=";
+                    x86_64-darwin = "sha256-eUo2w/fr9sWPIInCJgaKU50XBbo1ilZ5tRZxyNx+vHs=";
+                    aarch64-darwin = "sha256-heG8eKtFvcX4KnusOSnjfQcoNKWE0iWDokmNxnu2JM0=";
+                  }
+                  .${system};
+
               in
               pkgs.stdenv.mkDerivation {
                 pname = "terraform";
-                inherit version;
+                version = terraformVersion;
                 src = pkgs.fetchurl {
-                  url = "https://releases.hashicorp.com/terraform/${version}/terraform_${version}_${platform}.zip";
-                  hash = "sha256-OANLONAwljmaehJkoUVhqAKbK0lv0fFpRSZW5Tlo8bc=";
+                  url = "https://releases.hashicorp.com/terraform/${terraformVersion}/terraform_${terraformVersion}_${terraformPlatform}.zip";
+                  hash = terraformHash;
                 };
+
                 nativeBuildInputs = [ pkgs.unzip ];
                 sourceRoot = ".";
                 installPhase = "install -Dm755 terraform $out/bin/terraform";
               };
 
+            hm = home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+
+              modules = [
+                nixdot.homeModules.shell
+                nixdot.homeModules.git
+                {
+                  home.username = "dev";
+                  home.homeDirectory = "/home/dev";
+                  home.stateVersion = "25.05";
+                }
+              ];
+            };
+
             hm-files =
               (home-manager.lib.homeManagerConfiguration {
                 inherit pkgs;
                 modules = [
-                  #./shell.nix # ou "${shell-config}/shell.nix" si le fichier vit dans ton flake shell
                   nixdot.homeModules.shell
+                  # nixdot.homeModules.git
                   {
                     home = {
                       username = "dev";
                       homeDirectory = "/home/dev";
                       stateVersion = "25.05";
                     };
-                    # �vite que HISTFILE pointe vers /home/dev
+                    # Evite que HISTFILE pointe vers /home/dev
                     programs.zsh.history.path = "$HOME/.zsh_history";
                   }
                 ];
@@ -101,7 +123,6 @@
           system,
           pkgs,
           custom-vim,
-          # terraform-old,
           terraform-bin,
           hm-files,
           ...
