@@ -116,6 +116,7 @@
               qrencode
               srm
               cowsay
+              lolcat
             ];
 
             #shellHook = ''
