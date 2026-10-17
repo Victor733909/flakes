@@ -256,4 +256,3 @@ augroup END
 
 " Insert a Bash shebang at the beginning of the file
 let @a = "ggi#!/usr/bin/env bash\n\n"
-echo "BIENVENUE !!!!"
