@@ -139,6 +139,7 @@
               cowsay
               lolcat
               awscli2
+              fortune
             ];
 
             #shellHook = ''
@@ -161,7 +162,7 @@
                 chmod -R u+w "$ZDOTDIR"
               fi
               if [ -z "$ZSH_VERSION" ]; then
-                echo "Welcome to your virtual Zsh + Oh My Zsh devShell!" | cowsay | lolcat
+                fortune | cowsay | lolcat
                 exec zsh
               fi
               export AWS_CA_BUNDLE="/usr/local/share/ca-certificates/root_ca.crt"
