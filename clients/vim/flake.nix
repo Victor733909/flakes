@@ -138,6 +138,7 @@
               srm
               cowsay
               lolcat
+              awscli2
             ];
 
             #shellHook = ''
