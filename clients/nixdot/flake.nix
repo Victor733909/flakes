@@ -7,7 +7,13 @@
     nixdot.url = "github:barnaby0x0/nixdot";
   };
 
-  outputs = { self, nixpkgs, nixdot, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixdot,
+      ...
+    }:
     let
       systems = [
         "x86_64-linux"
@@ -16,18 +22,21 @@
         "aarch64-darwin"
       ];
 
-      forAllSystems = f: nixpkgs.lib.genAttrs systems(
-        system:
-        f rec {
-          inherit system;
-          pkgs = import nixpkgs { inherit system; };
-        }
-      );
+      forAllSystems =
+        f:
+        nixpkgs.lib.genAttrs systems (
+          system:
+          f rec {
+            inherit system;
+            pkgs = import nixpkgs { inherit system; };
+          }
+        );
     in
     {
+      formatter = forAllSystems ({ pkgs, ... }: pkgs.nixfmt);
       # nix develop --command nixdot --config ./user-config.nix
       devShells = forAllSystems (
-        {system, pkgs}:
+        { system, pkgs }:
         {
           default = pkgs.mkShell {
             packages = [
@@ -35,6 +44,7 @@
               nixdot.packages.${system}.nixdot
             ];
           };
-        });
+        }
+      );
     };
 }
