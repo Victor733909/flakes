@@ -27,7 +27,7 @@
     {
       # nix develop --command nixdot --config ./user-config.nix
       devShells = forAllSystems (
-        {pkgs}:
+        {system, pkgs}:
         {
           default = pkgs.mkShell {
             packages = [
