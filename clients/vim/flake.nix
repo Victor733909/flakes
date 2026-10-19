@@ -164,6 +164,7 @@
                 echo "Welcome to your virtual Zsh + Oh My Zsh devShell!" | cowsay | lolcat
                 exec zsh
               fi
+              export AWS_CA_BUNDLE="/usr/local/share/ca-certificates/root_ca.crt"
             '';
           };
         }
