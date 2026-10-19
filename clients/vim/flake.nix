@@ -140,6 +140,7 @@
               lolcat
               awscli2
               fortune
+              bat
             ];
 
             #shellHook = ''
