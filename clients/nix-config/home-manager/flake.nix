@@ -11,7 +11,7 @@
     };
 
     nix-config = {
-      url = "github:barnaby0x0/nix-config";
+      url = "github:barnaby0x0/nix-config/features/devshell-base";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
